@@ -2,7 +2,14 @@
   <div>
     <v-card class="concert-card" v-if="concert">
       <div class="img-card">
-        <img :src="require(`@/assets/noimg.jpg`)" width="100%" />
+        <img
+          :src="
+            concert.concert.image
+              ? concert.concert.image
+              : require(`@/assets/noimg.jpg`)
+          "
+          width="100%"
+        />
       </div>
       <v-card-title class="pb-0">
         {{ concert.concert.title }}

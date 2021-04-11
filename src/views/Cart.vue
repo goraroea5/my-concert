@@ -75,7 +75,6 @@ export default {
   methods: {
     deleteItem(item) {
       const editedIndex = this.getCart.indexOf(item);
-      console.log(editedIndex);
       this.$swal
         .fire({
           title: "คุณต้องการจะลบสินค้านี้ในตระกร้าใช่หรือไม่ ?",
@@ -116,6 +115,12 @@ export default {
         if (api.success) {
           this.$store.dispatch("user/clearCart");
           this.$swal.fire("สั่งซื้อสินค้าสำเร็จ !!", "", "success");
+        } else {
+          this.$swal.fire(
+            "สั่งซื้อสินค้าไม่สำเร็จ !!",
+            `${api.message}`,
+            "error"
+          );
         }
       }
     },

@@ -191,9 +191,6 @@ export default {
         await ConcertService.createZone(payload);
         await this.$swal("สร้าง Zone สำเร็จ", "", "success");
         await this.getZone();
-
-        // console.log(this.editedItem);
-        // this.zone.push(this.editedItem);
       }
       this.close();
     },

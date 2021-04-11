@@ -6,7 +6,10 @@
         :style="{ backgroundImage: 'url(' + getConcert.description.img + ')' }"
       /> -->
       <div class="box mt-5">
-        <img :src="require(`@/assets/noimg.jpg`)" width="50%" />
+        <img
+          :src="concertImage ? concertImage : require(`@/assets/noimg.jpg`)"
+          width="50%"
+        />
         <div class="box-text ma-14">
           <h1 class="mb-8">{{ concertTitle }}</h1>
           <h5>
@@ -35,7 +38,7 @@
           width="100%"
           class="center"
         /> -->
-        <div class="text-center" v-html="concertLocation"></div>
+        <div class="text-center" v-html="concertDetail"></div>
       </div>
       <div class="table my-10">
         <v-data-table
@@ -47,13 +50,13 @@
           <template v-slot:item.actions="{ item }">
             <v-btn
               color="success"
-              :disabled="!getUser || item.amout < 1"
+              :disabled="!getUser || item.amout < 1 || getUser.role === 'admin'"
               @click="selected(item, getConcert)"
             >
               {{
                 getUser
                   ? item.amout != 0
-                    ? "BUY"
+                    ? "ADD TO CART"
                     : "Sold Out"
                   : "กรุณาเข้าสู่ระบบ"
               }}</v-btn
@@ -92,6 +95,9 @@ export default {
       getConcert: "getConcert",
       getUser: "getUser",
     }),
+    concertImage() {
+      return this.concert?.concert[0]?.image || false;
+    },
     concertTitle() {
       return this.concert?.concert[0]?.title || "[no title]";
     },
@@ -117,14 +123,12 @@ export default {
       const id = this.$route.params.id;
       const { data } = await ConcertService.getConcertById(id);
       this.concert = data;
-      console.log(this.concert);
     },
     selected(zone, concert) {
       const data = {
         concert: concert.concert,
         zone: zone,
       };
-      console.log("selectedZoen", data);
       const payload = {
         concertId: data.concert.id,
         image: data.concert.image,
@@ -134,16 +138,6 @@ export default {
         price: zone.cost,
         zone: zone,
       };
-      console.log("payload", payload);
-      // const form = {
-      //   concertId: concert.id,
-      //   img: concert.description.img,
-      //   concertName: concert.description.title,
-      //   concertImg: concert.description.img,
-      //   zoneId: zone.id,
-      //   zoneName: zone.name,
-      //   price: zone.cost,
-      // };
 
       this.$store.dispatch("user/setCart", payload).then(() => {
         this.$swal("เพิ่มเข้าสู่ตระกร้าเรียบร้อย", "", "success");

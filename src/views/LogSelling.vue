@@ -40,7 +40,6 @@ export default {
           price: log.zoneDetail[0].cost,
         };
       });
-      console.log("logs", this.logs);
     },
   },
 };

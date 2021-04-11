@@ -175,10 +175,8 @@ export default {
       // api
       const { data } = await UserService.getAllUsers();
       this.users = data;
-      console.log("user", this.users);
     },
     editItem(item) {
-      console.log("edit", item);
       this.editedIndex = this.users.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
@@ -213,7 +211,6 @@ export default {
       if (this.editedIndex > -1) {
         // edit
         const id = this.editedItem.id;
-        console.log("edit", this.editedItem);
         const payload = {
           name: this.editedItem.name,
           email: this.editedItem.email,
@@ -222,7 +219,7 @@ export default {
         };
         const api = await UserService.editUser(id, payload);
         if (api.success) {
-          this.$swal.fire("เพิ่มผู้ใช้งานสำเร็จ !!", "", "success");
+          this.$swal.fire("แก้ไขผู้ใช้งานสำเร็จ !!", "", "success");
         }
         this.getUsers();
       } else {

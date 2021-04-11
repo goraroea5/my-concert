@@ -29,16 +29,14 @@
                 <v-tab-item>
                   <v-card height="auto">
                     <v-row justify="center">
-                      <v-col cols="9">
-                        <div class="image-preview text-center mb-4 pa-3">
-                          <img :src="form.img" width="100%" alt="" />
-                          <input
-                            @change="handleImage"
-                            class="custom-input"
-                            type="file"
-                            accept="image/*"
-                          />
-                        </div>
+                      <v-col cols="9" class="mt-3">
+                        <v-text-field
+                          label="URL รูปภาพ"
+                          v-model="form.image"
+                          append-icon="mdi-ticket-confirmation-outline"
+                          outlined
+                        >
+                        </v-text-field>
                         <!-- {{ editedConcert }} -->
                         <v-text-field
                           v-model="form.title"
@@ -196,7 +194,6 @@ export default {
         zone: this.editedConcert.zones,
       };
       this.form = { ...this.form, ...edit };
-      console.log("editform", this.form);
     },
     async createForm() {
       const create = {
@@ -211,30 +208,9 @@ export default {
       };
       this.form = { ...this.form, ...create };
     },
-    createBase64Image(fileObject) {
-      const render = new FileReader();
-      render.readAsDataURL(fileObject);
-      render.onload = (e) => {
-        this.form.img = e.target.result;
-      };
-    },
-    async creatConcertZone() {
-      const { data } = await ConcertService.getAllZone();
-      const zoneData = data.map((zone) => {
-        return {
-          id: zone.id,
-          name: zone.name,
-          cost: 0,
-          seatAmount: 0,
-        };
-      });
-      return zoneData;
-    },
     async edit() {
-      // let payload = {};
       if (this.editMode) {
         const concertId = this.form.id;
-
         const payload = {
           title: this.form.title,
           image: this.form.image,
@@ -289,16 +265,6 @@ export default {
           this.$swal("สร้างคอนเสิรต์สำเร็จ", "", "success");
           this.closeDialog();
         }
-        // payload = {
-        //   title: this.form.title,
-        //   detail: this.form.detail,
-        //   location: this.form.location,
-        //   img: this.form.date,
-        //   date: moment(this.form.date)
-        //     .utc()
-        //     .format(),
-        //   zone: this.form.zone,
-        // };
       }
       this.closeDialog();
     },
