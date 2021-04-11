@@ -134,7 +134,6 @@
 </template>
 
 <script>
-import Zone from "../../zone.json";
 import moment from "moment";
 import ConcertsProvider from "@/resources/concertDetailProvider";
 
@@ -160,7 +159,6 @@ export default {
       },
       tab: 0,
       items: ["ข้อมูล", "Zone"],
-      zones: Zone,
       editedForm: {},
     };
   },

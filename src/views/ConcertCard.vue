@@ -142,14 +142,6 @@ export default {
       this.$store.dispatch("user/setCart", payload).then(() => {
         this.$swal("เพิ่มเข้าสู่ตระกร้าเรียบร้อย", "", "success");
       });
-      // const form = {
-      //   idConcert: concert.id,
-      //   img: concert.img,
-      //   title: concert.img,
-      //   zone: zone,
-      //   price: zone.cost,
-      //   amount: 1,
-      // };
     },
   },
 };
