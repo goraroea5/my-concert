@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "zoneName": "A"
+    },
+    {
+      "id": 2,
+      "zoneName": "B"
+    },
+    {
+      "id": 3,
+      "zoneName": "C"
+    }
+  ]
+}

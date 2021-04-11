@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&display=swap");
+
+$primary: #1976d2;
+$body-font-family: "Kanit", sans-serif;
+$font-size-root: 16px;
+* {
+  box-sizing: border-box;
+}
+
+.headline {
+  font-size: 2rem !important;
+  font-weight: 600 !important;
+}
+
+.router-link a {
+  text-decoration: none !important;
+}
+
+.v-card__title {
+  text-decoration: none !important;
+}
+
+.v-badge__badge {
+  inset: auto auto calc(100% - 15px) calc(100% - 12px) !important;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
