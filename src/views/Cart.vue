@@ -2,7 +2,12 @@
   <div>
     <v-container>
       <h2>ตระกร้าสินค้า</h2>
-      <v-data-table :headers="headers" :items="getCart" hide-default-footer>
+      <v-data-table
+        :headers="headers"
+        :items="getCart"
+        hide-default-footer
+        items-per-page="999"
+      >
         <template v-slot:item.image="{ item }">
           <img :src="item.image" alt="" height="100px" />
         </template>
