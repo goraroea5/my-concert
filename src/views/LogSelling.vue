@@ -31,6 +31,7 @@ export default {
   methods: {
     async getAllLogSelling() {
       const { data } = await ConcertService.getLogSelling();
+
       this.logs = data.map((log) => {
         return {
           date: moment(log.ticket.createdAt).format("YYYY-MM-DD"),

@@ -177,10 +177,6 @@ export default {
     this.createForm();
   },
   methods: {
-    handleImage(e) {
-      const selectedImage = e.target.files[0];
-      this.createBase64Image(selectedImage);
-    },
     editform() {
       const edit = {
         id: this.editedConcert.concert.id,
@@ -205,6 +201,18 @@ export default {
         zone: await this.creatConcertZone(),
       };
       this.form = { ...this.form, ...create };
+    },
+    async creatConcertZone() {
+      const { data } = await ConcertService.getAllZone();
+      const zoneData = data.map((zone) => {
+        return {
+          id: zone.id,
+          name: zone.name,
+          cost: 0,
+          seatAmount: 0,
+        };
+      });
+      return zoneData;
     },
     async edit() {
       if (this.editMode) {
@@ -296,8 +304,6 @@ export default {
           }
         });
     },
-    allowedDates: (val) =>
-      parseInt(val.split("-")[2], 10) > (val.split("-")[2], 10),
   },
 };
 </script>
@@ -308,7 +314,6 @@ export default {
   overflow: hidden;
   img {
     width: 100%;
-
     object-fit: cover;
   }
 }
