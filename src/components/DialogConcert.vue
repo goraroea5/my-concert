@@ -86,8 +86,8 @@
                     </v-row>
                   </v-card>
                 </v-tab-item>
-                <v-tab-item>
-                  <v-card height="500">
+                <v-tab-item scrollable>
+                  <v-card height="auto">
                     <v-row
                       justify="center"
                       align="center"
